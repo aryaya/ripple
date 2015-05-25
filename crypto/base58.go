@@ -49,6 +49,7 @@ func Base58Decode(b, alphabet string) ([]byte, error) {
 	checksum := DoubleSha256(val[0 : len(val)-4])
 	expected := val[len(val)-4:]
 	if !bytes.Equal(checksum[0:4], expected) {
+		println(b)
 		return nil, fmt.Errorf("Bad Base58 checksum: %v expected %v", checksum, expected)
 	}
 	return val, nil

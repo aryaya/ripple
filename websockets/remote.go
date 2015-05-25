@@ -6,14 +6,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"net"
-	"net/url"
+	// "net"
+	// "net/url"
 	"reflect"
 	"time"
 
 	"github.com/golang/glog"
-	"github.com/gorilla/websocket"
 	"github.com/wangch/ripple/data"
+	// "golang.org/x/net/websocket"
+	"github.com/gorilla/websocket"
 )
 
 const (
@@ -27,7 +28,7 @@ const (
 	pingPeriod = (pongWait * 9) / 10
 
 	// Time allowed to connect to server.
-	dialTimeout = 5 * time.Second
+	dialTimeout = 1 * time.Second
 )
 
 type Remote struct {
@@ -40,19 +41,17 @@ type Remote struct {
 // server endpoint URI. To close the connection, use Close().
 func NewRemote(endpoint string) (*Remote, error) {
 	glog.Infoln(endpoint)
-	u, err := url.Parse(endpoint)
+	// u, err := url.Parse(endpoint)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// c, err := net.DialTimeout("tcp", u.Host, dialTimeout)
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	ws, _, err := websocket.DefaultDialer.Dial(endpoint, nil) //NewClient(c, u, nil, 1024, 1024)
 	if err != nil {
-		println("go here0", err)
-		return nil, err
-	}
-	c, err := net.DialTimeout("tcp", u.Host, dialTimeout)
-	if err != nil {
-		println("go here1", err)
-		return nil, err
-	}
-	ws, _, err := websocket.NewClient(c, u, nil, 1024, 1024)
-	if err != nil {
-		log.Println("go here2", err, u, u.Host)
 		return nil, err
 	}
 	r := &Remote{
@@ -132,10 +131,12 @@ func (r *Remote) run() {
 			}
 			// Stream message
 			factory, ok := streamMessageFactory[response.Type]
+			println(response.Type)
 			if ok {
 				cmd := factory()
 				if err := json.Unmarshal(in, &cmd); err != nil {
-					glog.Errorln(err.Error(), string(in))
+					log.Println(err)
+					// glog.Errorln(err.Error(), string(in))
 					continue
 				}
 				r.Incoming <- cmd
@@ -370,6 +371,7 @@ func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bo
 	cmd := &SubscribeCommand{
 		Command: newCommand("subscribe"),
 		Streams: streams,
+		// Accounts: accounts,
 	}
 	r.outgoing <- cmd
 	<-cmd.Ready

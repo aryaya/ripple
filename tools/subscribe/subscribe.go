@@ -19,17 +19,17 @@ func checkErr(err error, quit bool) {
 }
 
 var (
-	host = flag.String("host", "wss://s-east.ripple.com:443", "websockets host to connect to")
+	host    = flag.String("host", "wss://local.icloud.com:19528", "websockets host to connect to")
+	account = flag.String("acc", "iHb9CJAWyB4ij91VRWn96DkukG4bwdtyTh", "account address for monitor")
 )
 
 func main() {
 	flag.Parse()
-	println(*host)
 	r, err := websockets.NewRemote(*host)
 	checkErr(err, true)
 
 	// Subscribe to all streams
-	confirmation, err := r.Subscribe(true, false, true, true)
+	confirmation, err := r.Subscribe(true, true, false, false)
 	checkErr(err, true)
 	terminal.Println(fmt.Sprint("Subscribed at: ", confirmation.LedgerSequence), terminal.Default)
 
