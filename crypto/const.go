@@ -3,14 +3,14 @@ package crypto
 type HashVersion byte
 
 const (
-	ACCOUNT_ZERO = "rrrrrrrrrrrrrrrrrrrrrhoLvTp"
-	ACCOUNT_ONE  = "rrrrrrrrrrrrrrrrrrrrBZbvji"
-	NaN          = "rrrrrrrrrrrrrrrrrrrn5RM1rHd"
-	ROOT         = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
+	ACCOUNT_ZERO = "iiiiiiiiiiiiiiiiiiiiihoLvTp"
+	ACCOUNT_ONE  = "iiiiiiiiiiiiiiiiiiiiBZbvjr"
+	NaN          = "iiiiiiiiiiiiiiiiiiin5RM1rHd"
+	ROOT         = "iHb9CJAWyB4ij91VRWn96DkukG4bwdtyTh"
 )
 
 const (
-	ALPHABET = "rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz"
+	ALPHABET = "ipshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqr1tuvAxyz"
 
 	RIPPLE_ACCOUNT_ID      HashVersion = 0
 	RIPPLE_NODE_PUBLIC     HashVersion = 28
@@ -33,3 +33,7 @@ var hashTypes = [...]struct {
 	RIPPLE_ACCOUNT_PRIVATE: {"Account private key.", 'p', 32, 52},
 	RIPPLE_ACCOUNT_PUBLIC:  {"Account public key.", 'a', 33, 53},
 }
+
+//100000000000000000
+//99000000000000000
+//999999999999910

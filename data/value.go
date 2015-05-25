@@ -99,7 +99,7 @@ var valueRegex = regexp.MustCompile("([+-]?)(\\d*)(\\.(\\d*))?([eE]([+-]?)(\\d+)
 
 // NewValue accepts a string representation of a value and a flag to indicate if it
 // should be stored as native. If the native flag is set AND a decimal is used, the
-// number is interpreted as XRP. If no decimal is used, it is interpreted as drips.
+// number is interpreted as ICC. If no decimal is used, it is interpreted as drips.
 func NewValue(s string, native bool) (*Value, error) {
 	var err error
 	v := Value{
@@ -334,7 +334,7 @@ func (num Value) Divide(den Value) (*Value, error) {
 	return v, v.canonicalise()
 }
 
-// Ratio returns the ratio a/b. XRP are interpreted at face value rather than drips.
+// Ratio returns the ratio a/b. ICC are interpreted at face value rather than drips.
 // The result of Ratio is always a non-native Value for additional precision.
 func (a Value) Ratio(b Value) (*Value, error) {
 	var err error
@@ -453,7 +453,7 @@ func (v Value) Rat() *big.Rat {
 }
 
 // String returns the Value as a string for human consumption. Native values are
-// represented as decimal XRP rather than drips.
+// represented as decimal ICC rather than drips.
 func (v Value) String() string {
 	if v.IsZero() {
 		return "0"

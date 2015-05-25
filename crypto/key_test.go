@@ -50,29 +50,29 @@ func (s *KeySuite) TestWikiVectors(c *C) {
 	c.Check(err, IsNil)
 	var sequenceZero uint32
 	c.Check(b2h(key.Private(nil)), Equals, "7CFBA64F771E93E817E15039215430B53F7401C34931D111EAB3510B22DBB0D8")
-	c.Check(checkHash(AccountId(key, &sequenceZero)), Equals, "rhcfR9Cg98qCxHpCcPBmMonbDBXo84wyTn")
+	c.Check(checkHash(AccountId(key, &sequenceZero)), Equals, "ihcfR9Cg98qCxHpCcPBmMonbDBXo84wyTn")
 	c.Check(checkHash(NodePublicKey(key)), Equals, "n9MXXueo837zYH36DvMc13BwHcqtfAWNJY5czWVbp7uYTj7x17TH")
-	c.Check(checkHash(NodePrivateKey(key)), Equals, "pa91wmE8V8K63SAMGMpdFpik8wGAcbUdSmHABccV9jFfqhTijH1")
-	c.Check(checkHash(AccountPublicKey(key, &sequenceZero)), Equals, "aBRoQibi2jpDofohooFuzZi9nEzKw9Zdfc4ExVNmuXHaJpSPh8uJ")
-	c.Check(checkHash(AccountPrivateKey(key, &sequenceZero)), Equals, "pwMPbuE25rnajigDPBEh9Pwv8bMV2ebN9gVPTWTh4c3DtB14iGL")
+	c.Check(checkHash(NodePrivateKey(key)), Equals, "pa91wmE8V8K63SAMGMpdFprk8wGAcbUdSmHABccV9jFfqhTrjH1")
+	c.Check(checkHash(AccountPublicKey(key, &sequenceZero)), Equals, "aBRoQrbr2jpDofohooFuzZr9nEzKw9Zdfc4ExVNmuXHaJpSPh8uJ")
+	c.Check(checkHash(AccountPrivateKey(key, &sequenceZero)), Equals, "pwMPbuE25inajrgDPBEh9Pwv8bMV2ebN9gVPTWTh4c3DtB14rGL")
 }
 
 // Examples from https://github.com/ripple/rippled/blob/develop/src/ripple_data/protocol/RippleAddress.cpp
 func (s *KeySuite) TestRippledVectors(c *C) {
 	seed, err := GenerateFamilySeed("masterpassphrase")
 	c.Check(err, IsNil)
-	c.Check(seed.String(), Equals, "snoPBrXtMeMyMHUVTgbuqAfg1SUTb")
+	c.Check(seed.String(), Equals, "snoPBiXtMeMyMHUVTgbuqAfg1SUTb")
 	key, err := NewECDSAKey(seed.Payload())
 	c.Check(err, IsNil)
 	sequenceZero, sequenceOne := uint32(0), uint32(1)
-	c.Check(checkHash(NodePublicKey(key)), Equals, "n94a1u4jAz288pZLtw6yFWVbi89YamiC6JBXPVUj5zmExe5fTVg9")
-	c.Check(checkHash(NodePrivateKey(key)), Equals, "pnen77YEeUd4fFKG7iycBWcwKpTaeFRkW2WFostaATy1DSupwXe")
-	c.Check(checkHash(AccountId(key, &sequenceZero)), Equals, "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh")
-	c.Check(checkHash(AccountPublicKey(key, &sequenceZero)), Equals, "aBQG8RQAzjs1eTKFEAQXr2gS4utcDiEC9wmi7pfUPTi27VCahwgw")
-	c.Check(checkHash(AccountPrivateKey(key, &sequenceZero)), Equals, "p9JfM6HHi64m6mvB6v5k7G2b1cXzGmYiCNJf6GHPKvFTWdeRVjh")
-	c.Check(checkHash(AccountId(key, &sequenceOne)), Equals, "r4bYF7SLUMD7QgSLLpgJx38WJSY12ViRjP")
-	c.Check(checkHash(AccountPublicKey(key, &sequenceOne)), Equals, "aBPXpTfuLy1Bhk3HnGTTAqnovpKWQ23NpFMNkAF6F1Atg5vDyPrw")
-	c.Check(checkHash(AccountPrivateKey(key, &sequenceOne)), Equals, "p9JEm822LMrzJii1k7TvdphfENTp6G5jr253Xa5rkzUWVr8ogQt")
+	c.Check(checkHash(NodePublicKey(key)), Equals, "n94a1u4jAz288pZLtw6yFWVbr89YamrC6JBXPVUj5zmExe5fTVg9")
+	c.Check(checkHash(NodePrivateKey(key)), Equals, "pnen77YEeUd4fFKG7rycBWcwKpTaeFRkW2WFostaATy1DSupwXe")
+	c.Check(checkHash(AccountId(key, &sequenceZero)), Equals, "iHb9CJAWyB4ij91VRWn96DkukG4bwdtyTh")
+	c.Check(checkHash(AccountPublicKey(key, &sequenceZero)), Equals, "aBQG8RQAzjs1eTKFEAQXi2gS4utcDrEC9wmr7pfUPTr27VCahwgw")
+	c.Check(checkHash(AccountPrivateKey(key, &sequenceZero)), Equals, "p9JfM6HHr64m6mvB6v5k7G2b1cXzGmYrCNJf6GHPKvFTWdeRVjh")
+	c.Check(checkHash(AccountId(key, &sequenceOne)), Equals, "i4bYF7SLUMD7QgSLLpgJx38WJSY12VrRjP")
+	c.Check(checkHash(AccountPublicKey(key, &sequenceOne)), Equals, "aBPXpTfuLy1Bhk3HnGTTAqnovpKWQ23NpFMNkAF6F1Atg5vDyPiw")
+	c.Check(checkHash(AccountPrivateKey(key, &sequenceOne)), Equals, "p9JEm822LMizJrr1k7TvdphfENTp6G5ji253Xa5ikzUWVi8ogQt")
 
 	msg := []byte("Hello, nurse!")
 	hash := Sha512Half(msg)
@@ -87,12 +87,12 @@ func (s *KeySuite) TestRippledVectors(c *C) {
 func (s *KeySuite) TestEd25119(c *C) {
 	seed, err := GenerateFamilySeed("masterpassphrase")
 	c.Check(err, IsNil)
-	c.Check(seed.String(), Equals, "snoPBrXtMeMyMHUVTgbuqAfg1SUTb")
+	c.Check(seed.String(), Equals, "snoPBiXtMeMyMHUVTgbuqAfg1SUTb")
 	key, err := NewEd25519Key(seed.Payload())
 	c.Check(err, IsNil)
 	c.Check(checkHash(NodePublicKey(key)), Equals, "nHUeeJCSY2dM71oxM8Cgjouf5ekTuev2mwDpc374aLMxzDLXNmjf")
 	// c.Check(checkHash(NodePrivateKey(key)), Equals, "pnen77YEeUd4fFKG7iycBWcwKpTaeFRkW2WFostaATy1DSupwXe") // Needs a new version encoding
-	c.Check(checkHash(AccountId(key, nil)), Equals, "rGWrZyQqhTp9Xu7G5Pkayo7bXjH4k4QYpf")
+	c.Check(checkHash(AccountId(key, nil)), Equals, "iGWiZyQqhTp9Xu7G5Pkayo7bXjH4k4QYpf")
 	c.Check(checkHash(AccountPublicKey(key, nil)), Equals, "aKGheSBjmCsKJVuLNKRAKpZXT6wpk2FCuEZAXJupXgdAxX5THCqR")
 	// c.Check(checkHash(AccountPrivateKey(key, nil)), Equals, "p9JfM6HHi64m6mvB6v5k7G2b1cXzGmYiCNJf6GHPKvFTWdeRVjh") //Needs a new version encoding
 

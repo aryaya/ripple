@@ -28,9 +28,9 @@ func (t Trade) Price() *Value {
 // 	QualityIn and QualityOut are earned by the Liquidity Provider and can be negative.
 //
 // Four scenarios:
-// 	1. XRP -> XRP
-// 	2. XRP -> IOU/Issuer 			Requires an orderbook
-// 	3. IOU/Issuer -> XRP			Requires an orderbook
+// 	1. ICC -> ICC
+// 	2. ICC -> IOU/Issuer 			Requires an orderbook
+// 	3. IOU/Issuer -> ICC			Requires an orderbook
 // 	4. IOU/IssuerA <-> IOU/IssuerB		Also known as Rippling, requires an account which trusts both currency/issuer pairs
 type Transfer struct {
 	Source             Account
@@ -38,7 +38,7 @@ type Transfer struct {
 	SourceBalance      Amount
 	DestinationBalance Amount
 	Change             Value
-	TransitFee         *Value // Applies to all transfers except XRP -> XRP
+	TransitFee         *Value // Applies to all transfers except ICC -> ICC
 	QualityIn          *Value // Applies to IOU -> IOU transfers
 	QualityOut         *Value // Applies to IOU -> IOU transfers
 }
@@ -223,7 +223,7 @@ func (txm *TransactionWithMetaData) Balances() (BalanceSlice, error) {
 			}
 			switch node.ModifiedNode.LedgerEntryType {
 			case ACCOUNT_ROOT:
-				// Changed XRP Balance
+				// Changed ICC Balance
 				var (
 					previous = node.ModifiedNode.PreviousFields.(*AccountRoot)
 					current  = node.ModifiedNode.FinalFields.(*AccountRoot)

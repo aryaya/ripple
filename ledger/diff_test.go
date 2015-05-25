@@ -3,8 +3,8 @@ package ledger
 import (
 	"testing"
 
-	"github.com/rubblelabs/ripple/data"
-	"github.com/rubblelabs/ripple/storage/memdb"
+	"github.com/wangch/ripple/data"
+	"github.com/wangch/ripple/storage/memdb"
 	. "gopkg.in/check.v1"
 )
 

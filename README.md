@@ -3,8 +3,8 @@ ripple
 
 Go packages to interact with the Ripple protocol.
 
-[![GoDoc](https://godoc.org/github.com/rubblelabs/ripple?status.png)](https://godoc.org/github.com/rubblelabs/ripple)
-[![Build Status](https://drone.io/github.com/rubblelabs/ripple/status.png)](https://drone.io/github.com/rubblelabs/ripple/latest)
+[![GoDoc](https://godoc.org/github.com/wangch/ripple?status.png)](https://godoc.org/github.com/wangch/ripple)
+[![Build Status](https://drone.io/github.com/wangch/ripple/status.png)](https://drone.io/github.com/wangch/ripple/latest)
 
 The data, crypto, and websockets packages are very functional and quite well tested. Most websockets commands are implemented but not all.
 
@@ -19,14 +19,14 @@ We've included command-line tools to show how to apply the library:
 
 The hope is one day that these packages might lay the foundations for an alternative implementation of the [Ripple daemon](https://github.com/ripple/rippled). This is, however, a long way off!
 
-Please bear in mind that this has been an exercise that has taken a lot of time, so if you want to help and are not a developer, bounties and thanks are more than welcome. Please see the [AUTHORS](https://github.com/rubblelabs/ripple/blob/master/AUTHORS) file. If you'd like to chat about the code, have a look here:
+Please bear in mind that this has been an exercise that has taken a lot of time, so if you want to help and are not a developer, bounties and thanks are more than welcome. Please see the [AUTHORS](https://github.com/wangch/ripple/blob/master/AUTHORS) file. If you'd like to chat about the code, have a look here:
 
-[![Gitter chat](https://badges.gitter.im/rubblelabs/ripple.png)](https://gitter.im/rubblelabs/ripple)
+[![Gitter chat](https://badges.gitter.im/wangch/ripple.png)](https://gitter.im/wangch/ripple)
 
 ## Test Coverage
 
-[crypto package](https://drone.io/github.com/rubblelabs/ripple/files/crypto.html)
+[crypto package](https://drone.io/github.com/wangch/ripple/files/crypto.html)
 
-[data package](https://drone.io/github.com/rubblelabs/ripple/files/data.html)
+[data package](https://drone.io/github.com/wangch/ripple/files/data.html)
 
-[websockets package](https://drone.io/github.com/rubblelabs/ripple/files/websockets.html)
+[websockets package](https://drone.io/github.com/wangch/ripple/files/websockets.html)

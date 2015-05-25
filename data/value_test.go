@@ -1,7 +1,7 @@
 package data
 
 import (
-	. "github.com/rubblelabs/ripple/testing"
+	. "github.com/wangch/ripple/testing"
 	. "gopkg.in/check.v1"
 )
 
@@ -41,7 +41,7 @@ var valueTests = TestSlice{
 	{valueCheckCanonical(false, true, 9999999999999999, 80).String(), Equals, "-9999999999999999e80", "String -9999999999999999, 80"},
 	{valueCheckCanonical(false, true, 1000000000000000, -96).String(), Equals, "-1e-81", "String -1000000000000000, -96"},
 
-	// Native is stored as drips, but String()ed as XRP
+	// Native is stored as drips, but String()ed as ICC
 	{valueCheckCanonical(true, false, 1, 0).String(), Equals, "0.000001", "String n1, 1"},
 	{valueCheckCanonical(true, false, 1, 10).String(), Equals, "10000", "String n1, 10"},
 	{valueCheckCanonical(true, false, 1, 5).String(), Equals, "0.1", "String n1, 5"},

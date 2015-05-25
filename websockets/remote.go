@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net"
 	"net/url"
 	"reflect"
@@ -12,7 +13,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/gorilla/websocket"
-	"github.com/rubblelabs/ripple/data"
+	"github.com/wangch/ripple/data"
 )
 
 const (
@@ -41,14 +42,17 @@ func NewRemote(endpoint string) (*Remote, error) {
 	glog.Infoln(endpoint)
 	u, err := url.Parse(endpoint)
 	if err != nil {
+		println("go here0", err)
 		return nil, err
 	}
 	c, err := net.DialTimeout("tcp", u.Host, dialTimeout)
 	if err != nil {
+		println("go here1", err)
 		return nil, err
 	}
 	ws, _, err := websocket.NewClient(c, u, nil, 1024, 1024)
 	if err != nil {
+		log.Println("go here2", err, u, u.Host)
 		return nil, err
 	}
 	r := &Remote{

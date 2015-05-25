@@ -13,7 +13,7 @@ type Currency [20]byte
 type CurrencyType uint8
 
 const (
-	CT_XRP       CurrencyType = 0
+	CT_ICC       CurrencyType = 0
 	CT_STANDARD  CurrencyType = 1
 	CT_DEMURRAGE CurrencyType = 2
 	CT_HEX       CurrencyType = 3
@@ -25,7 +25,7 @@ var zeroCurrency Currency
 // Accepts currency as either a 3 character code
 // or a 40 character hex string
 func NewCurrency(s string) (Currency, error) {
-	if s == "XRP" {
+	if s == "ICC" {
 		return zeroCurrency, nil
 	}
 	var currency Currency
@@ -73,7 +73,7 @@ func (c Currency) IsNative() bool {
 func (c Currency) Type() CurrencyType {
 	switch {
 	case c.IsNative():
-		return CT_XRP
+		return CT_ICC
 	case c[0] == 0x00:
 		for i, b := range c {
 			if i < 12 && i > 14 && b != 0 {
@@ -115,8 +115,8 @@ func (c Currency) String() string {
 // Currency in computer parsable form
 func (c Currency) Machine() string {
 	switch c.Type() {
-	case CT_XRP:
-		return "XRP"
+	case CT_ICC:
+		return "ICC"
 	case CT_STANDARD:
 		// Check for unprintable characters
 		for _, r := range string(c[12:15]) {

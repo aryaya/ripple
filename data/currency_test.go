@@ -9,12 +9,12 @@ type CurrencySuite struct{}
 var _ = Suite(&CurrencySuite{})
 
 func (s *CurrencySuite) TestCurrencyTypes(c *C) {
-	xrp, err := NewCurrency("XRP")
+	icc, err := NewCurrency("ICC")
 	c.Assert(err, IsNil)
-	c.Assert(xrp.Machine(), Equals, "XRP")
-	c.Assert(xrp.String(), Equals, "XRP")
-	c.Assert(xrp.Type(), Equals, CT_XRP)
-	c.Assert(xrp.IsNative(), Equals, true)
+	c.Assert(icc.Machine(), Equals, "ICC")
+	c.Assert(icc.String(), Equals, "ICC")
+	c.Assert(icc.Type(), Equals, CT_ICC)
+	c.Assert(icc.IsNative(), Equals, true)
 
 	usd, err := NewCurrency("USD")
 	c.Assert(err, IsNil)

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rubblelabs/ripple/terminal"
-	"github.com/rubblelabs/ripple/websockets"
+	"github.com/wangch/ripple/terminal"
+	"github.com/wangch/ripple/websockets"
 )
 
 func checkErr(err error, quit bool) {
@@ -24,6 +24,7 @@ var (
 
 func main() {
 	flag.Parse()
+	println(*host)
 	r, err := websockets.NewRemote(*host)
 	checkErr(err, true)
 

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rubblelabs/ripple/crypto"
+	"github.com/wangch/ripple/crypto"
 )
 
 type Hash128 [16]byte

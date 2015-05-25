@@ -3,8 +3,8 @@ package ledger
 import (
 	"fmt"
 
-	"github.com/rubblelabs/ripple/data"
-	"github.com/rubblelabs/ripple/storage"
+	"github.com/wangch/ripple/data"
+	"github.com/wangch/ripple/storage"
 )
 
 type RadixNode struct {
