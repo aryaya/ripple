@@ -131,7 +131,6 @@ func (r *Remote) run() {
 			}
 			// Stream message
 			factory, ok := streamMessageFactory[response.Type]
-			println(response.Type)
 			if ok {
 				cmd := factory()
 				if err := json.Unmarshal(in, &cmd); err != nil {
@@ -354,7 +353,7 @@ func (r *Remote) AccountInfo(a data.Account) (*AccountInfoResult, error) {
 
 // Synchronously subscribe to streams and receive a confirmation message
 // Streams are recived asynchronously over the Incoming channel
-func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bool) (*SubscribeResult, error) {
+func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bool, accounts []string) (*SubscribeResult, error) {
 	streams := []string{}
 	if ledger {
 		streams = append(streams, "ledger")
@@ -369,9 +368,9 @@ func (r *Remote) Subscribe(ledger, transactions, transactionsProposed, server bo
 		streams = append(streams, "server")
 	}
 	cmd := &SubscribeCommand{
-		Command: newCommand("subscribe"),
-		Streams: streams,
-		// Accounts: accounts,
+		Command:  newCommand("subscribe"),
+		Streams:  streams,
+		Accounts: accounts,
 	}
 	r.outgoing <- cmd
 	<-cmd.Ready

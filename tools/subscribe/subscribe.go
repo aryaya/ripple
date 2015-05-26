@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	// "fmt"
 	"os"
 
 	"github.com/wangch/ripple/terminal"
@@ -29,9 +29,9 @@ func main() {
 	checkErr(err, true)
 
 	// Subscribe to all streams
-	confirmation, err := r.Subscribe(true, true, false, false)
+	_, err = r.Subscribe(false, false, false, false, []string{*account})
 	checkErr(err, true)
-	terminal.Println(fmt.Sprint("Subscribed at: ", confirmation.LedgerSequence), terminal.Default)
+	// terminal.Println(fmt.Sprint("Subscribed at: ", confirmation.LedgerSequence), terminal.Default)
 
 	// Consume messages as they arrive
 	for {
