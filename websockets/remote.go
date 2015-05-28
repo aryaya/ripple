@@ -2,10 +2,11 @@ package websockets
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"log"
+	// "log"
 	// "net"
 	// "net/url"
 	"reflect"
@@ -41,16 +42,8 @@ type Remote struct {
 // server endpoint URI. To close the connection, use Close().
 func NewRemote(endpoint string) (*Remote, error) {
 	glog.Infoln(endpoint)
-	// u, err := url.Parse(endpoint)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// c, err := net.DialTimeout("tcp", u.Host, dialTimeout)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	ws, _, err := websocket.DefaultDialer.Dial(endpoint, nil) //NewClient(c, u, nil, 1024, 1024)
+	dialer := &websocket.Dialer{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
+	ws, _, err := dialer.Dial(endpoint, nil) //NewClient(c, u, nil, 1024, 1024)
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +127,7 @@ func (r *Remote) run() {
 			if ok {
 				cmd := factory()
 				if err := json.Unmarshal(in, &cmd); err != nil {
-					log.Println(err)
-					// glog.Errorln(err.Error(), string(in))
+					glog.Errorln(err.Error(), string(in))
 					continue
 				}
 				r.Incoming <- cmd
