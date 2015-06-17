@@ -1,8 +1,9 @@
 package main
 
 import (
+	// "encoding/json"
 	"flag"
-	// "fmt"
+	// "log"
 	"os"
 
 	"github.com/wangch/ripple/terminal"
@@ -58,6 +59,10 @@ func main() {
 			for _, balance := range balances {
 				terminal.Println(balance, terminal.DoubleIndent)
 			}
+			// log.Println(msg.Transaction.GetType())
+			// b, err := json.MarshalIndent(msg, "", "  ")
+			// log.Println(string(b))
+
 		case *websockets.ServerStreamMsg:
 			terminal.Println(msg, terminal.Default)
 		}

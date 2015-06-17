@@ -2,6 +2,7 @@ package websockets
 
 import (
 	"encoding/json"
+	// "runtime/debug"
 
 	"github.com/wangch/ripple/data"
 )
@@ -64,6 +65,7 @@ type SubscribeResult struct {
 type txStreamJSON TransactionStreamMsg
 
 func (msg *TransactionStreamMsg) UnmarshalJSON(b []byte) error {
+	// debug.PrintStack()
 	var extract struct {
 		*txStreamJSON
 		MetaData *data.MetaData `json:"meta"`

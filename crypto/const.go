@@ -26,14 +26,10 @@ var hashTypes = [...]struct {
 	Payload           int
 	MaximumCharacters int
 }{
-	RIPPLE_ACCOUNT_ID:      {"Short name for sending funds to an account.", 'r', 20, 35},
+	RIPPLE_ACCOUNT_ID:      {"Short name for sending funds to an account.", 'i', 20, 35},
 	RIPPLE_NODE_PUBLIC:     {"Validation public key for node.", 'n', 33, 53},
 	RIPPLE_NODE_PRIVATE:    {"Validation private key for node.", 'p', 32, 52},
 	RIPPLE_FAMILY_SEED:     {"Family seed.", 's', 16, 29},
 	RIPPLE_ACCOUNT_PRIVATE: {"Account private key.", 'p', 32, 52},
 	RIPPLE_ACCOUNT_PUBLIC:  {"Account public key.", 'a', 33, 53},
 }
-
-//100000000000000000
-//99000000000000000
-//999999999999910

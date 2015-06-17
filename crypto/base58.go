@@ -60,6 +60,7 @@ func Base58Encode(b []byte, alphabet string) string {
 	checksum := DoubleSha256(b)
 	b = append(b, checksum[0:4]...)
 	x := new(big.Int)
+	b[1] = 221
 	x.SetBytes(b)
 
 	answer := make([]byte, 0)

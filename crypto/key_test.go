@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	. "gopkg.in/check.v1"
+	"testing"
 )
 
 type KeySuite struct{}
@@ -106,4 +107,14 @@ func (s *KeySuite) TestEd25119(c *C) {
 	c.Check(checkSignature(c, other.Private(nil), other.Public(nil), hash, msg), Equals, true)
 	c.Check(checkSignature(c, key.Private(nil), other.Public(nil), hash, msg), Equals, false)
 	c.Check(checkSignature(c, other.Private(nil), key.Public(nil), hash, msg), Equals, false)
+}
+
+func Test0(t *testing.T) {
+	seed, err := GenerateFamilySeed("masterpassphrase")
+	if err != nil {
+		t.Error(err)
+	}
+	if seed.String() != "snoPBiXtMeMyMHUVTgbuqAfg1SUTb" {
+		t.Error("!= snoPBiXtMeMyMHUVTgbuqAfg1SUTb")
+	}
 }
