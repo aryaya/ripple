@@ -2,7 +2,7 @@ package ledger
 
 import (
 	"fmt"
-	"github.com/golang/glog"
+	"github.com/wangch/glog"
 	"github.com/wangch/ripple/data"
 	"github.com/wangch/ripple/storage"
 	"github.com/wangch/ripple/terminal"

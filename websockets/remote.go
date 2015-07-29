@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/golang/glog"
+	"github.com/wangch/glog"
 	"github.com/wangch/ripple/data"
 	// "golang.org/x/net/websocket"
 	"github.com/gorilla/websocket"
@@ -188,6 +188,22 @@ func (r *Remote) AccountTx(account data.Account, pageSize int) chan *data.Transa
 	c := make(chan *data.TransactionWithMetaData)
 	go r.accountTx(account, c, pageSize)
 	return c
+}
+
+// Synchronously submit a single transaction
+func (r *Remote) SubmitWithSign(ptx *PaymentTx, secret string) (*SubmitResult, error) {
+	cmd := &SubmitPaymentCommand{
+		Command:   newCommand("submit"),
+		TxJson:    ptx,
+		Secret:    secret,
+		BuildPath: !ptx.Amount.IsNative(),
+	}
+	r.outgoing <- cmd
+	<-cmd.Ready
+	if cmd.CommandError != nil {
+		return nil, cmd.CommandError
+	}
+	return cmd.Result, nil
 }
 
 // Synchronously submit a single transaction

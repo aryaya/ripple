@@ -117,6 +117,25 @@ func (txr *TxResult) UnmarshalJSON(b []byte) error {
 	return json.Unmarshal(b, &txr.TransactionWithMetaData)
 }
 
+type PaymentTx struct {
+	TransactionType string
+	Account         string
+	Amount          *data.Amount
+	Destination     string
+	InvoiceID       string
+}
+
+type SubmitPaymentCommand struct {
+	*Command
+	TxJson     *PaymentTx    `json:"tx_json"`
+	Secret     string        `json:"secret"`
+	FailHard   bool          `json:"fail_hard,omitempty"`
+	Offline    bool          `json:"offline,omitempty"`
+	BuildPath  bool          `json:"build_path,omitempty"`
+	FeeMultMax int           `json:"fee_mult_max,omitempty"`
+	Result     *SubmitResult `json:"result,omitempty"`
+}
+
 type SubmitCommand struct {
 	*Command
 	TxBlob string        `json:"tx_blob"`
